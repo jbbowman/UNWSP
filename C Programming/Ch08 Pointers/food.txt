@@ -1,0 +1,6 @@
+name    food
+jim     pizza
+sally   lasagna
+jill    salad
+wendy   hamburger
+harvy  strawberries
