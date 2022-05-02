@@ -1,0 +1,118 @@
+-------------------------------------------------------------
+
+--Host Configuration--
+
+sudo setip [address] [subnet mask]
+
+-------------------------------------------------------------
+
+--Router Running Configuration-- (config t)
+
+hostname [name]
+
+no ip domain-lookup
+service password-encryption
+enable secret class
+banner motd #
+Unauthorized access is strictly prohibited. #
+line con 0
+password cisco
+login
+logging synchronous
+line vty 0 4
+password cisco
+login
+
+-------------------------------------------------------------
+
+--Router Interface Configuration-- (config t)
+
+int [f0/0, s0/0, vlan 1, loopback 0]
+ip address [address] [subnet mask]
+
+clock rate 56000
+
+no shut
+exit
+
+ip default-gateway [address]
+
+-------------------------------------------------------------
+
+--RIP2 Configuration-- (config t)
+
+--R1--
+router rip
+version 2
+network [R1/S1 FA/vlan x.x.x.0]
+network [R1 loopback x.x.x.0]
+network [R1/R2 serial x.x.x.0]
+
+passive-interface [f0/0, s0/0]
+
+--R2--
+router rip
+version 2
+network [R2/S2 FA/vlan x.x.x.0]
+network [R2 loopback x.x.x.0]
+network [R1/R2 serial x.x.x.0]
+
+passive-interface [f0/0, s0/0]
+
+-------------------------------------------------------------
+
+--Verify Connectivity--
+
+ping [hosts, loopbacks, etc]
+sho ip int brief
+sho ip route
+sho ip protocols
+sho run
+debug ip rip / undebug all
+
+no auto-summary, clear ip route, show ip route (turns off auto-summary)
+config t, ip route 0.0.0.0 0.0.0.0 [address] (sets static route, forwards unrecognized traffic to address)
+
+
+-------------------------------------------------------------
+
+--Standard ACL Configuration-- (config t)
+(filter traffic based on source ip address only; apply it as close to the destination as possible)
+
+--Numbered--
+access-list [ACL number] [deny, permit, remark] [source] [source-wildcard]
+int [f0/0, s0/0, vlan 1, loopback 0]
+ip access-group [ACL #] [in, out]
+
+--Named--
+ip access-list standard [name]
+permit [source] [source-wildcard]
+int [f0/0, s0/0, vlan 1, loopback 0]
+ip access-group [ACL name] [in, out]
+
+sho access-lists [ACL number, name, or null
+sho ip int [f0/0, s0/0, vlan 1, loopback 0]
+
+R1# ping
+Protocol [ip]:
+Target IP address: [self]
+Repeat count [5]:
+Datagram size [100]:
+Timeout in seconds [2]:
+Extended commands [n]: y
+Source address or interface: [source]
+Type of service [0]:
+Set DF bit in IP header? [no]:
+Validate reply data? [no]:
+Data pattern [0xABCD]:
+Loose, Strict, Record, Timestamp, Verbose[none]:
+Sweep range of sizes [n]:
+Type escape sequence to abort.
+
+-------------------------------------------------------------
+
+--Sites--
+
+https://sites.radford.edu/~hlee3/classes/backup/itec451_spring2017/Cisco/CCNA2_RSE_spring2017/Lab%20Source%20Files_solutions/
+https://sites.radford.edu/~hlee3/classes/backup/itec451_spring2017/Cisco/CCNA2_RSE_spring2017/Lab%20Source%20Files_solutions/3.2.1.9%20Lab%20-%20Configuring%20Basic%20RIPv2%20-%20solution.pdf
+https://sites.radford.edu/~hlee3/classes/backup/itec451_spring2017/Cisco/CCNA2_RSE_spring2017/Lab%20Source%20Files_solutions/7.2.2.6%20Lab%20-%20Configuring%20and%20Modifying%20Standard%20IPv4%20ACLs%20-%20solution.pdf
