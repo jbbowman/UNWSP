@@ -2,7 +2,8 @@
 // DIP - Direction, Interface, Protocol
 // Wild Card- 0 = Match, 1 = Ignore
 // host = 0.0.0.0, any = 1.1.1.1
-// https://sites.radford.edu/~hlee3/classes/backup/itec451_spring2017/Cisco/CCNA2_RSE_spring2017/Lab%20Source%20Files_solutions/7.2.2.6%20Lab%20-%20Configuring%20and%20Modifying%20Standard%20IPv4%20ACLs%20-%20solution.pdf
+// standard - https://sites.radford.edu/~hlee3/classes/backup/itec451_spring2017/Cisco/CCNA2_RSE_spring2017/Lab%20Source%20Files_solutions/7.2.2.6%20Lab%20-%20Configuring%20and%20Modifying%20Standard%20IPv4%20ACLs%20-%20solution.pdf
+// extended - https://is.muni.cz/el/fi/podzim2018/PV233/um/materialy_acl_extended/4.2.2.13_Lab_-_Configuring_and_Verifying_Extended_ACLs_-_ILM.pdf
 
 config t
 
@@ -36,3 +37,8 @@ Data pattern [0xABCD]:
 Loose, Strict, Record, Timestamp, Verbose[none]:
 Sweep range of sizes [n]:
 Type escape sequence to abort.
+
+// other cmd: no access-list [ACL number]
+// standard = osi layer 3 and near destination, extended = osi layer 3/4 and near source
+// source = the network or host from which the packet is being sent
+// keywords: sequential, filter/funnel

@@ -1,0 +1,58 @@
+// basics - https://sites.radford.edu/~hlee3/classes/backup/itec451_spring2017/Cisco/CCNA2_RSE_spring2017/Lab%20Source%20Files_solutions/5.1.1.6%20Lab%20-%20Configuring%20Basic%20Switch%20Settings%20-%20solution.pdf
+// security - https://sites.radford.edu/~hlee3/classes/backup/itec451_spring2017/Cisco/CCNA2_RSE_spring2017/Lab%20Source%20Files_solutions/5.2.2.9%20Lab%20-%20Configuring%20Switch%20Security%20Features%20-%20solution.pdf
+// trunk - https://sites.radford.edu/~hlee3/classes/backup/itec451_spring2017/Cisco/CCNA2_RSE_spring2017/Lab%20Source%20Files_solutions/6.2.2.5%20Lab%20-%20Configuring%20VLANs%20and%20Trunking%20-%20solution.pdf
+
+config t
+
+vlan [#]
+exit
+
+int vlan[#]
+ip address [address] [subnet mask]
+no shut
+exit
+
+int range [f0/1-24],[f0/25]
+switchport access vlan [#], shutdown
+exit
+
+sho vlan brief
+sho mac address-table
+
+/* 
+additional details:
+
+•	Vty = Virtual Telatype (16 different lines(0-15))
+o	16 possible simultaneous sessions
+•	telnet = outdated and insecure
+•	PuTTY
+o	Utility that runs on windows
+Commands
+•	Show version
+o	Should display K9 to indicate encryption
+•	Show ip ssh
+o	Reveals ssh version (1 or 2)
+•	Ip ssh version 2
+•	Ip domain-name [domain-name]
+•	Crypto key generate rsa
+•	Username [username] secret [password]
+•	Transport ssh line
+o	Prevents use of telnet
+•	Line vty
+•	Ip ssh
+o	Ssh status
+•	Sho ssh
+o	See devices
+•	Shutdown
+o	Shutdown a port
+o	“no shutdown” to reenable port
+•	Interface range [int type] [module/first-number] – [last-number]
+•	Switchport port-security mac-address [mac-address]
+o	There is static secure MAC address
+o	Dynamic secure MAC addresses
+•	Interface fastethernet 0/18
+•	Switchport mode access
+•	Switchport port-security
+•	Sho port-security interface fastethernet 0/18
+•	Sho port-security address
+*/
