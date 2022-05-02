@@ -1,0 +1,11 @@
+config t
+
+int [f0/0, s0/0, vlan 1, loopback 0]
+ip address [address] [subnet mask]
+
+clock rate 56000
+
+no shut
+exit
+
+ip default-gateway [address]

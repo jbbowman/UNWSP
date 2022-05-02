@@ -1,0 +1,17 @@
+config t
+
+hostname [name]
+
+no ip domain-lookup
+service password-encryption
+enable secret class
+banner motd #
+Unauthorized access is strictly prohibited. #
+Line con 0
+password cisco
+login
+logging synchronous
+line vty 0 15
+password cisco
+login
+exit

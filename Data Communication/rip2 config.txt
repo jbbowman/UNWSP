@@ -1,0 +1,35 @@
+// https://sites.radford.edu/~hlee3/classes/backup/itec451_spring2017/Cisco/CCNA2_RSE_spring2017/Lab%20Source%20Files_solutions/3.2.1.9%20Lab%20-%20Configuring%20Basic%20RIPv2%20-%20solution.pdf
+
+config t
+
+/* R1 */
+router rip
+version 2
+network [R1/S1 FA/vlan x.x.x.0]
+network [R1 loopback x.x.x.0]
+network [R1/R2 serial x.x.x.0]
+
+passive-interface [f0/0, s0/0]
+
+/* R2 */
+router rip
+version 2
+network [R2/S2 FA/vlan x.x.x.0]
+network [R2 loopback x.x.x.0]
+network [R1/R2 serial x.x.x.0]
+
+passive-interface [f0/0, s0/0]
+
+/* Verification */
+ping [hosts, loopbacks, etc]
+sho ip int brief
+sho ip route
+sho ip protocols
+sho run
+sho start
+sho flash
+sho arp
+debug ip rip / undebug all
+
+no auto-summary, clear ip route, show ip route (turns off auto-summary)
+config t, ip route 0.0.0.0 0.0.0.0 [address] (sets static route, forwards unrecognized traffic to address)
